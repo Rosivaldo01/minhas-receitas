@@ -22,7 +22,11 @@ Um site simples em **React** para exibir, pesquisar e favoritar receitas.
 
 ## 📷 Demonstração
 
-![Screenshot do site](https://imgur.com/a/x8PRa8Y)
+## 📷 Demonstração
+
+![Screenshot do site](https://i.imgur.com/xxxxx.png)
+
+
 
 ---
 
