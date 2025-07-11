@@ -1,25 +1,59 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState, useEffect } from "react";
+import RecipeList from "./components/RecipeList";
+import SearchBar from "./components/SearchBar";
+import Favorites from "./components/Favorites";
+import recipesData from "./data/recipes";
+import Header from "./components/Header";
+
+
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+  const [searchTerm, setSearchTerm] = useState("");
+  const [favorites, setFavorites] = useState(() => {
+    return JSON.parse(localStorage.getItem("favorites")) || [];
+  });
+
+  useEffect(() => {
+    localStorage.setItem("favorites", JSON.stringify(favorites));
+  }, [favorites]);
+
+  const handleFavorite = (id) => {
+    setFavorites((prev) =>
+        prev.includes(id) ? prev.filter((fid) => fid !== id) : [...prev, id]
+    );
+  };
+
+  const filteredRecipes = recipesData.filter((recipe) =>
+      recipe.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
+    return (
+        <>
+            <Header />
+            <div className="App">
+                <div className="section">
+                    <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+                </div>
+
+                <div className="section">
+                    <Favorites
+                        recipes={recipesData}
+                        favorites={favorites}
+                        handleFavorite={handleFavorite}
+                    />
+                </div>
+
+                <div className="section">
+                    <RecipeList
+                        recipes={filteredRecipes}
+                        favorites={favorites}
+                        handleFavorite={handleFavorite}
+                    />
+                </div>
+            </div>
+        </>
+    );
+
 }
 
 export default App;
