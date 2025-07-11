@@ -20,16 +20,6 @@ Um site simples em **React** para exibir, pesquisar e favoritar receitas.
 
 ---
 
-## 📷 Demonstração
-
-## 📷 Demonstração
-
-![Screenshot do site](https://i.imgur.com/xxxxx.png)
-
-
-
----
-
 ## 🛠 Como rodar o projeto
 
 ```bash
